@@ -31,4 +31,8 @@ describe Restaurant do
             end
         end
     end
+
+    describe "#to_hash" do
+        it 'returns a hash will all instance variables'
+    end
 end
