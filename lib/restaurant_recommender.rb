@@ -32,7 +32,11 @@ class RestaurantRecommender
     end
 
     # Export all the restaurants to file_name
+    # Use File.write(your_file_name_here, your_str_here) to get the test to pass
     def export_restaurants(file_name)
+        puts "going to write:"
+        puts "#{{ restaurants: self.restaurants.map(&:to_hash) }.to_json}"
+        File.write(file_name, { restaurants: self.restaurants.map(&:to_hash) }.to_json )
     end
 
     # Return a string with 2 restaurant names
