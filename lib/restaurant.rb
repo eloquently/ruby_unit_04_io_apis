@@ -5,7 +5,7 @@ class Restaurant
         self.name = options[:name]
         self.street_address = options[:street_address]
         self.city = options[:city]
-        self.state = options[:zip]
+        self.state = options[:state]
         self.zip = options[:zip]
         self.category = options[:category]
     end
@@ -13,16 +13,24 @@ class Restaurant
     # This method combines street_address, city, state, and zip into an
     # address that you can search in Google Maps. See the spec file for
     # an example format.
+    
+    def full_address
+        return nil if @street_address == nil or @city == nil or @state == nil or @zip == nil
+        address = @street_address + ", " + @city + ", " + @state + " " + @zip
+        return address
+    end
 
     # Note that we don't have getter methods for the address component
     # variables, so you need to access the instance variable directly
     # by using the @ syntax (e.g. @street_address rather than
     # self.street_address)
-    def full_address
-    end
+
 
     # This method returns a hash with keys equal to the instance variable
     # names and values equal to the values from those instance variables
     def to_hash
+        hash = {name: self.name, street_address: @street_address,
+        city: @city, state: @state, zip: @zip, category: self.category}
+        return hash
     end
 end
