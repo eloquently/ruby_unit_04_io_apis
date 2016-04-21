@@ -8,6 +8,22 @@ class RestaurantRecommender
         self.restaurants = restaurants
     end
 
+    # Takes command entered by user and calls the appropriate method.
+    # e.g. if command == "export output.json" this method should
+    # return the result of self.export_restaurants('output.json')
+
+    # The names of the commands are up to you. The specs for this method
+    # are outlined in the spec file, but you need to write them.
+
+    # The import command is provided as an example (tests included as well)
+    def dispatch_command(command)
+        command_words = command.split(' ')
+
+        if command_words[0] == "import"
+            return import_restaurants(command_words[1])
+        end
+    end
+
     # Import all the restaurants
     # Use the File.read method in order to make the test pass
     def import_restaurants(file_name)
@@ -23,22 +39,6 @@ class RestaurantRecommender
 
     # Return the number of restaurants available
     def count_restaurants
-    end
-
-    # Takes command entered by user and calls the appropriate method.
-    # e.g. if command == "export output.json" this method should
-    # return the result of self.export_restaurants('output.json')
-
-    # The names of the commands are up to you. The specs for this method
-    # are outlined in the spec file, but you need to write them.
-
-    # The import command is provided as an example (tests included as well)
-    def dispatch_command(command)
-        command_words = command.split(' ')
-
-        if command_words[0] == "import"
-            return import_restaurants(command_words[1])
-        end
     end
 
     # Search foursquare for venues in the given category
