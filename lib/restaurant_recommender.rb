@@ -49,7 +49,7 @@ class RestaurantRecommender
     # The default category id below is for the "Food" category
 
     # You don't have to test this method ... we'll discuss how to do this later
-    def self.search_foursquare(location, category_id='4d4b7105d754a06374d81259')
+    def self.search_foursquare(location, category_id)
     end
 
     # This method takes a string (the result of a foursquare api call)
@@ -58,6 +58,13 @@ class RestaurantRecommender
     def self.import_from_foursquare(foursquare_text)
     end
 
-    def self.foursquare_lookup
+    # This performs the complete search and import operation on foursquare.
+    # We separated out the other methods to make our methods easier to understand
+    # and test.
+    def foursquare_lookup(location, category_id='4d4b7105d754a06374d81259')
+        foursquare_results = RestaurantRecommender.search_foursquare(location, category_id)
+        new_restaurants = RestaurantRecommender.import_from_foursquare(foursquare_results)
+        self.restaurants += new_restaurants
+        return "#{new_restaurants.count} new restaurants added"
     end
 end
