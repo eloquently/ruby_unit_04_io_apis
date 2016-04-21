@@ -1,5 +1,5 @@
 class Restaurant
-    attr_accessor :name
+    attr_accessor :name, :category
     attr_writer :street_address, :city, :state, :zip
     def initialize(options={})
         self.name = options[:name]
@@ -7,6 +7,7 @@ class Restaurant
         self.city = options[:city]
         self.state = options[:zip]
         self.zip = options[:zip]
+        self.category = options[:category]
     end
 
     # This method combines street_address, city, state, and zip into an
