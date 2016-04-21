@@ -3,7 +3,7 @@ class Restaurant
     attr_writer :street_address, :city, :state, :zip
     def initialize(options={})
         self.name = options[:name]
-        self.street_address = options[:name]
+        self.street_address = options[:street_address]
         self.city = options[:city]
         self.state = options[:zip]
         self.zip = options[:zip]
