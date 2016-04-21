@@ -29,7 +29,9 @@ describe RestaurantRecommender do
     end
 
     describe '#count_restaurants' do
-        it 'returns the number of restaurants'
+        it 'returns the number of restaurants' do
+            expect(rr.count_restaurants).to eq(2)
+        end
     end
 
     describe '#dispatch_command' do

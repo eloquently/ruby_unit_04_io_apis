@@ -21,6 +21,10 @@ class RestaurantRecommender
 
         if command_words[0] == "import"
             return import_restaurants(command_words[1])
+        elsif command_words[0] == "export"
+            return export_restaurants(command_words[1])
+        elsif command_words[0] == "count"
+            return count_restaurants
         end
     end
 
@@ -34,7 +38,6 @@ class RestaurantRecommender
     # Export all the restaurants to file_name
     # Use File.write(your_file_name_here, your_str_here) to get the test to pass
     def export_restaurants(file_name)
-        puts "going to write:"
         puts "#{{ restaurants: self.restaurants.map(&:to_hash) }.to_json}"
         File.write(file_name, { restaurants: self.restaurants.map(&:to_hash) }.to_json )
     end
@@ -45,6 +48,7 @@ class RestaurantRecommender
 
     # Return the number of restaurants available
     def count_restaurants
+        return restaurants.count
     end
 
     # Search foursquare for venues in the given category
