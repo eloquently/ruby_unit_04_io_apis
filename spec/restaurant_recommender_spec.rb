@@ -9,6 +9,21 @@ describe RestaurantRecommender do
 
     let(:rr) { RestaurantRecommender.new(restaurants) }
 
+    describe '#dispatch_command' do
+        it 'calls import_restaurants' do
+            expect(rr).to receive(:import_restaurants).with('file_name.json').and_return(nil)
+            rr.dispatch_command('import file_name.json')
+        end
+
+        it 'calls export_restaurants'
+
+        it 'calls recommendations'
+
+        it 'calls count_restaurants'
+
+        it 'calls foursquare_lookup'
+    end
+
     describe "#import_restaurants" do
         it 'adds new restaurants' do
             data = { restaurants: [ { name: 'Restaurant 3'} ] }
@@ -30,21 +45,6 @@ describe RestaurantRecommender do
 
     describe '#count_restaurants' do
         it 'returns the number of restaurants'
-    end
-
-    describe '#dispatch_command' do
-        it 'calls import_restaurants' do
-            expect(rr).to receive(:import_restaurants).with('file_name.json').and_return(nil)
-            rr.dispatch_command('import file_name.json')
-        end
-
-        it 'calls export_restaurants'
-
-        it 'calls recommendations'
-
-        it 'calls count_restaurants'
-
-        it 'calls foursquare_lookup'
     end
 
     describe 'RestaurantRecommender#import_from_foursquare' do
