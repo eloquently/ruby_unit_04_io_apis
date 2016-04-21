@@ -66,6 +66,10 @@ class RestaurantRecommender
     # and returns an array of Restaurant objects contained in the foursquare
     # api call
     def self.import_from_foursquare(foursquare_text)
+        results = JSON.parse(foursquare_text)
+        fsq_restaurants = results["response"]["venues"]
+        restaurants = fsq_restaurants.map{ |h| Restaurant.new(name: h["name"],
+                                                              category: h["categories"].first["name"])}
     end
 
     # This performs the complete search and import operation on foursquare.
