@@ -26,13 +26,15 @@ class RestaurantRecommender
         end
     end
 
-    # Import all the restaurants
-    # Use the File.read method in order to make the test pass
-    def import_restaurants(file_name)
-    end
-
     # Export all the restaurants to file_name
     def export_restaurants(file_name)
+    end
+
+    # Import all the restaurants from file_name and add them to @restaurants
+    # The file you're importing from will have the same format as the file
+    # created by export_restaurants.
+    # Use the File.read method in order to make the test pass
+    def import_restaurants(file_name)
     end
 
     # Return a string with 2 restaurant names
