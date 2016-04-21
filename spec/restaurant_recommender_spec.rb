@@ -19,21 +19,44 @@ describe RestaurantRecommender do
     end
 
     describe "#export_restaurants" do
-        it "should create 'filename' and put 'text' in it" do
+        it "creates 'filename' and puts the appropriate text in it" do
             require 'json'
             file = mock('file')
-            expect { File }.to receive(:open).with("filename", "w").and_yield(file)
-            expect { file }.to receive(:write).with({ restaurants: rr.restaurants.map(&:to_hash) }.to_json)
+            expect(File).to receive(:open).with("filename", "w").and_yield(file)
+            expect(file).to receive(:write).with({ restaurants: rr.restaurants.map(&:to_hash) }.to_json)
         end
     end
 
-    describe 'RestaurantRater#import_from_foursquare' do
+    describe '#recommendations' do
+        it 'returns a string with Restaurant 1 and Restaurant 2'
+    end
+
+    describe '#count_restaurants' do
+        it 'returns the number of restaurants'
+    end
+
+    describe '#dispatch_command' do
+        it 'calls import_restaurants' do
+            expect(rr).to receive(:import_restaurants).with('file_name.json').and_return(nil)
+            dispatch_command('import file_name.json')
+        end
+
+        it 'calls export_restaurants'
+
+        it 'calls search_foursquare'
+
+        it 'calls recommendations'
+
+        it 'calls count_restaurants'
+    end
+
+    describe 'RestaurantRecommender#import_from_foursquare' do
         let(:foursquare_text) do
             open('../data/foursquare.json').read
         end
 
         let(:imported_restaurants) do
-            RestaurantRater.import_from_foursquare(foursquare_text)
+            RestaurantRecommender.import_from_foursquare(foursquare_text)
         end
 
         it 'imports correct number of venues' do
