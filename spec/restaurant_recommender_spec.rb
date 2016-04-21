@@ -40,11 +40,11 @@ describe RestaurantRecommender do
 
         it 'calls export_restaurants'
 
-        it 'calls search_foursquare'
-
         it 'calls recommendations'
 
         it 'calls count_restaurants'
+
+        it 'calls foursquare_lookup'
     end
 
     describe 'RestaurantRecommender#import_from_foursquare' do

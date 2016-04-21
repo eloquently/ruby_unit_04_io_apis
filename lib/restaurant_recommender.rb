@@ -13,7 +13,9 @@ class RestaurantRecommender
     # return the result of self.export_restaurants('output.json')
 
     # The names of the commands are up to you. The specs for this method
-    # are outlined in the spec file, but you need to write them.
+    # are outlined in the spec file, but you need to write them. Your life
+    # will be easier if you choose to make the command one word (e.g. export,
+    # import, recommend, count, lookup)
 
     # The import command is provided as an example (tests included as well)
     def dispatch_command(command)
@@ -54,5 +56,8 @@ class RestaurantRecommender
     # and returns an array of Restaurant objects contained in the foursquare
     # api call
     def self.import_from_foursquare(foursquare_text)
+    end
+
+    def self.foursquare_lookup
     end
 end
