@@ -31,26 +31,4 @@ describe Restaurant do
             end
         end
     end
-
-    describe 'Restaurant#import_from_foursquare' do
-        let(:foursquare_text) do
-            open('../data/foursquare.json').read
-        end
-
-        let(:imported_restaurants) do
-            Restaurant.import_from_foursquare(foursquare_text)
-        end
-
-        it 'imports correct number of venues' do
-            expect(imported_restaurants.count).to eq(19)
-        end
-
-        it 'gives each restaurant a name' do
-            expect(imported_restaurants.map(&:name).reject(&:nil?).count).to eq(19)
-        end
-
-        it 'gives each restaurant a category' do
-            expect(imported_restaurants.map(&:category).reject(&:nil?).count).to eq(19)
-        end
-    end
 end
