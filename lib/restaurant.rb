@@ -5,7 +5,7 @@ class Restaurant
         self.name = options[:name]
         self.street_address = options[:street_address]
         self.city = options[:city]
-        self.state = options[:zip]
+        self.state = options[:state]
         self.zip = options[:zip]
         self.category = options[:category]
     end
