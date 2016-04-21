@@ -19,9 +19,8 @@ describe RestaurantRecommender do
 
     describe "#export_restaurants" do
         it "creates 'filename' and puts the appropriate text in it" do
-            file = double('file')
-            expect(File).to receive(:open).with("filename", "w").and_yield(file)
-            expect(file).to receive(:write).with({ restaurants: rr.restaurants.map(&:to_hash) }.to_json)
+            expect(File).to receive(:write).with("filename", { restaurants: rr.restaurants.map(&:to_hash) }.to_json).and_return nil
+            rr.export_restaurants('filename')
         end
     end
 
