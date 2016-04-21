@@ -1,3 +1,4 @@
+require 'json'
 require 'restaurant_recommender'
 
 describe RestaurantRecommender do
@@ -10,17 +11,14 @@ describe RestaurantRecommender do
 
     describe "#import_restaurants" do
         it 'adds new restaurants' do
-            file = double('file')
-            allow(File).to receive(:open).with("filename").and_yield(file)
-            allow(file).to receive(:read).and_return('{ "restaurants": [ { "name": "Restaurant from file } ] }')
-
+            data = { restaurants: [ { name: 'Restaurant 3'} ] }
+            allow(File).to receive(:read).and_return(data.to_json)
             expect { rr.import_restaurants('filename') }.to change { rr.restaurants.count }.by 1
         end
     end
 
     describe "#export_restaurants" do
         it "creates 'filename' and puts the appropriate text in it" do
-            require 'json'
             file = double('file')
             expect(File).to receive(:open).with("filename", "w").and_yield(file)
             expect(file).to receive(:write).with({ restaurants: rr.restaurants.map(&:to_hash) }.to_json)

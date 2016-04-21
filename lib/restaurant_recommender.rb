@@ -1,3 +1,4 @@
+require 'json'
 require_relative 'restaurant'
 
 class RestaurantRecommender
@@ -8,6 +9,7 @@ class RestaurantRecommender
     end
 
     # Import all the restaurants
+    # Use the File.read method in order to make the test pass
     def import_restaurants(file_name)
     end
 
