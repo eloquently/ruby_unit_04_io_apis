@@ -29,7 +29,14 @@ class RestaurantRecommender
 
     # The names of the commands are up to you. The specs for this method
     # are outlined in the spec file, but you need to write them.
+
+    # The import command is provided as an example (tests included as well)
     def dispatch_command(command)
+        command_words = command.split(' ')
+
+        if command_words[0] == "import"
+            return import_restaurants(command_words[1])
+        end
     end
 
     # Search foursquare for venues in the given category
