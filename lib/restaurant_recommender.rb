@@ -1,3 +1,5 @@
+require_relative 'restaurant'
+
 class RestaurantRecommender
     attr_accessor :restaurants
 

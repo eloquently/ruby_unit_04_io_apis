@@ -10,9 +10,9 @@ describe RestaurantRecommender do
 
     describe "#import_restaurants" do
         it 'adds new restaurants' do
-            file = mock('file')
-            allow { File }.to receive(:open).with("filename").and_yield(file)
-            allow { File }.to receive(:read).and_return('{ "restaurants": [ { "name": "Restaurant from file } ] }')
+            file = double('file')
+            allow(File).to receive(:open).with("filename").and_yield(file)
+            allow(file).to receive(:read).and_return('{ "restaurants": [ { "name": "Restaurant from file } ] }')
 
             expect { rr.import_restaurants('filename') }.to change { rr.restaurants.count }.by 1
         end
@@ -21,7 +21,7 @@ describe RestaurantRecommender do
     describe "#export_restaurants" do
         it "creates 'filename' and puts the appropriate text in it" do
             require 'json'
-            file = mock('file')
+            file = double('file')
             expect(File).to receive(:open).with("filename", "w").and_yield(file)
             expect(file).to receive(:write).with({ restaurants: rr.restaurants.map(&:to_hash) }.to_json)
         end
@@ -38,7 +38,7 @@ describe RestaurantRecommender do
     describe '#dispatch_command' do
         it 'calls import_restaurants' do
             expect(rr).to receive(:import_restaurants).with('file_name.json').and_return(nil)
-            dispatch_command('import file_name.json')
+            rr.dispatch_command('import file_name.json')
         end
 
         it 'calls export_restaurants'
@@ -52,7 +52,7 @@ describe RestaurantRecommender do
 
     describe 'RestaurantRecommender#import_from_foursquare' do
         let(:foursquare_text) do
-            open('../data/foursquare.json').read
+            open('data/foursquare.json').read
         end
 
         let(:imported_restaurants) do
