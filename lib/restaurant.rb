@@ -5,7 +5,7 @@ class Restaurant
         self.name = options[:name]
         self.street_address = options[:street_address]
         self.city = options[:city]
-        self.state = options[:zip]
+        self.state = options[:state]
         self.zip = options[:zip]
         self.category = options[:category]
     end
@@ -19,10 +19,16 @@ class Restaurant
     # by using the @ syntax (e.g. @street_address rather than
     # self.street_address)
     def full_address
+        @street_address != nil ? "#{@street_address}, #{@city}, #{@state} #{@zip}" : nil
     end
 
     # This method returns a hash with keys equal to the instance variable
     # names and values equal to the values from those instance variables
     def to_hash
+        newhash = {}
+        self.instance_variables.each do |iv|
+            newhash[iv.to_s.delete("@").to_sym] = self.instance_variable_get(iv)
+        end
+        return newhash
     end
 end

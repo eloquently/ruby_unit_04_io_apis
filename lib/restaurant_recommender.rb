@@ -23,12 +23,23 @@ class RestaurantRecommender
 
         if command_words[0] == "import"
             return import_restaurants(command_words[1])
+        elsif command_words[0] == "export"
+            return export_restaurants(command_words[1])
+        elsif command_words[0] == "recommend"
+            return recommendations
+        elsif command_words[0] == "count"
+            return count_restaurants
+        elsif command_words[0] == "lookup"
+            return foursquare_lookup(command_words[1])
         end
     end
 
     # Import all the restaurants
     # Use the File.read method in order to make the test pass
     def import_restaurants(file_name)
+        count = 0
+        imported_restaurants = File.read(file_name)
+        return imported_restaurants
     end
 
     # Export all the restaurants to file_name

@@ -15,13 +15,25 @@ describe RestaurantRecommender do
             rr.dispatch_command('import file_name.json')
         end
 
-        it 'calls export_restaurants'
+        it 'calls export_restaurants'do
+            expect(rr).to receive(:export_restaurants).with('file_name.json').and_return(nil)
+            rr.dispatch_command('export file_name.json')
+        end
 
-        it 'calls recommendations'
+        it 'calls recommendations' do
+            expect(rr).to receive(:recommendations).and_return(nil)
+            rr.dispatch_command('recommend')
+        end
 
-        it 'calls count_restaurants'
+        it 'calls count_restaurants' do
+            expect(rr).to receive(:count_restaurants).and_return(nil)
+            rr.dispatch_command('count')
+        end
 
-        it 'calls foursquare_lookup'
+        it 'calls foursquare_lookup' do
+            expect(rr).to receive(:foursquare_lookup).and_return(nil)
+            rr.dispatch_command('lookup tempe')
+        end
     end
 
     describe "#import_restaurants" do
