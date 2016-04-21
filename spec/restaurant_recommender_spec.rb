@@ -24,18 +24,18 @@ describe RestaurantRecommender do
         it 'calls foursquare_lookup'
     end
 
+    describe "#export_restaurants" do
+        it "creates 'filename' and puts the appropriate text in it" do
+            expect(File).to receive(:write).with("filename", { restaurants: rr.restaurants.map(&:to_hash) }.to_json).and_return nil
+            rr.export_restaurants('filename')
+        end
+    end
+
     describe "#import_restaurants" do
         it 'adds new restaurants' do
             data = { restaurants: [ { name: 'Restaurant 3'} ] }
             allow(File).to receive(:read).and_return(data.to_json)
             expect { rr.import_restaurants('filename') }.to change { rr.restaurants.count }.by 1
-        end
-    end
-
-    describe "#export_restaurants" do
-        it "creates 'filename' and puts the appropriate text in it" do
-            expect(File).to receive(:write).with("filename", { restaurants: rr.restaurants.map(&:to_hash) }.to_json).and_return nil
-            rr.export_restaurants('filename')
         end
     end
 

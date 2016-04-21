@@ -30,6 +30,7 @@ class RestaurantRecommender
         end
     end
 
+<<<<<<< HEAD
     # Import all the restaurants
     # Use the File.read method in order to make the test pass
     def import_restaurants(file_name)
@@ -37,11 +38,20 @@ class RestaurantRecommender
         self.restaurants.concat(hash["restaurants"]) if hash["restaurants"]
     end
 
+=======
+>>>>>>> master
     # Export all the restaurants to file_name
     # Use File.write(your_file_name_here, your_str_here) to get the test to pass
     def export_restaurants(file_name)
         puts "#{{ restaurants: self.restaurants.map(&:to_hash) }.to_json}"
         File.write(file_name, { restaurants: self.restaurants.map(&:to_hash) }.to_json )
+    end
+
+    # Import all the restaurants from file_name and add them to @restaurants
+    # The file you're importing from will have the same format as the file
+    # created by export_restaurants.
+    # Use the File.read method in order to make the test pass
+    def import_restaurants(file_name)
     end
 
     # Return a string with 2 restaurant names
