@@ -1,4 +1,5 @@
 require 'json'
+require 'open-uri'
 require 'restaurant_recommender'
 
 describe RestaurantRecommender do
@@ -15,13 +16,24 @@ describe RestaurantRecommender do
             rr.dispatch_command('import file_name.json')
         end
 
-        it 'calls export_restaurants'
+        it 'calls export_restaurants' do
+            expect(rr).to receive(:export_restaurants).with('file_name.json').and_return(nil)
+            rr.dispatch_command('export file_name.json')
+        end
+        it 'calls recommendations' do
+            expect(rr).to receive(:recommendations).and_return(nil)
+            rr.dispatch_command('ideas')
+        end
 
-        it 'calls recommendations'
+        it 'calls count_restaurants' do
+            expect(rr).to receive(:count_restaurants).and_return(nil)
+            rr.dispatch_command('howmany')
+        end
 
-        it 'calls count_restaurants'
-
-        it 'calls foursquare_lookup'
+        it 'calls foursquare_lookup' do
+            expect(rr).to receive(:foursquare_lookup).and_return(nil)
+            rr.dispatch_command('lookup')
+        end
     end
 
     describe "#import_restaurants" do
@@ -40,11 +52,15 @@ describe RestaurantRecommender do
     end
 
     describe '#recommendations' do
-        it 'returns a string with Restaurant 1 and Restaurant 2'
+        it 'returns a string with Restaurant 1 and Restaurant 2' do
+            expect(rr.recommendations).to eq("Restaurant 1, Restaurant 2")
+        end
     end
 
     describe '#count_restaurants' do
-        it 'returns the number of restaurants'
+        it 'returns the number of restaurants' do
+            expect(rr.count_restaurants).to eq(2)
+        end
     end
 
     describe 'RestaurantRecommender#import_from_foursquare' do
