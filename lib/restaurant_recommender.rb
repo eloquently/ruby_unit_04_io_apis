@@ -27,6 +27,8 @@ class RestaurantRecommender
             return export_restaurants(command_words[1])
         elsif command_words[0] == "count"
             return count_restaurants
+        elsif command_words[0] == "whatsnear"
+            return foursquare_lookup(command_words[1])
         end
     end
 
@@ -62,6 +64,10 @@ class RestaurantRecommender
 
     # You don't have to test this method ... we'll discuss how to do this later
     def self.search_foursquare(location, category_id)
+        require 'open-uri'
+        secrets = JSON.parse(File.read('secrets.json'))
+        url = "https://api.foursquare.com/v2/venues/search?near=85282&v=20160421&client_id=#{secrets["foursquare_client_id"]}&client_secret=#{secrets["foursquare_client_secret"]}&categoryId=#{category_id}"
+        return open(url).read
     end
 
     # This method takes a string (the result of a foursquare api call)
@@ -70,8 +76,15 @@ class RestaurantRecommender
     def self.import_from_foursquare(foursquare_text)
         results = JSON.parse(foursquare_text)
         fsq_restaurants = results["response"]["venues"]
-        restaurants = fsq_restaurants.map{ |h| Restaurant.new(name: h["name"],
-                                                              category: h["categories"].first["name"])}
+        restaurants = fsq_restaurants.map do |h|
+            Restaurant.new(name: h["name"],
+                           category: h["categories"].first["name"],
+                           street_address: h["location"]["address"],
+                           city: h["location"]["city"],
+                           state: h["location"]["state"],
+                           zip: h["location"]["zip"])
+        end
+        return restaurants
     end
 
     # This performs the complete search and import operation on foursquare.
