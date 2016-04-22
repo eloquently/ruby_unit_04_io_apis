@@ -38,7 +38,7 @@ class RestaurantRecommender
     # Import all the restaurants
     # Use the File.read method in order to make the test pass
     def import_restaurants(file_name)
-        file_name == nil ? file_name = 'restaurants.json' : gobbledeegook = 1
+        file_name ||= 'restaurants.json'
         imported_array = JSON.parse(File.read(file_name))["restaurants"]
         imported_array.each do |i|
             self.restaurants << Restaurant.new(i)
@@ -47,7 +47,7 @@ class RestaurantRecommender
 
     # Export all the restaurants to file_name
     def export_restaurants(file_name)
-        file_name == nil ? file_name = 'restaurants.json' : gobbledeegook = 1
+        file_name ||= 'restaurants.json'
         File.write(file_name, { restaurants: self.restaurants.map(&:to_hash) }.to_json)
     end
 
