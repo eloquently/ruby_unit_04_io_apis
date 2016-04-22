@@ -1,4 +1,5 @@
 require 'json'
+require 'open-uri'
 require_relative 'restaurant'
 
 class RestaurantRecommender
@@ -29,14 +30,15 @@ class RestaurantRecommender
             return recommendations
         elsif command_words[0] == "count"
             return count_restaurants
-        elsif command_words[0] == "lookup"
-            return foursquare_lookup(command_words[1])
+        elsif command_words[0] == "search"
+            return foursquare_lookup(command_words[1],command_words[2])
         end
     end
 
     # Import all the restaurants
     # Use the File.read method in order to make the test pass
     def import_restaurants(file_name)
+        file_name == nil ? file_name = 'restaurants.json' : gobbledeegook = 1
         imported_array = JSON.parse(File.read(file_name))["restaurants"]
         imported_array.each do |i|
             self.restaurants << Restaurant.new(i)
@@ -45,6 +47,7 @@ class RestaurantRecommender
 
     # Export all the restaurants to file_name
     def export_restaurants(file_name)
+        file_name == nil ? file_name = 'restaurants.json' : gobbledeegook = 1
         File.write(file_name, { restaurants: self.restaurants.map(&:to_hash) }.to_json)
     end
 
@@ -64,13 +67,34 @@ class RestaurantRecommender
     # The default category id below is for the "Food" category
 
     # You don't have to test this method ... we'll discuss how to do this later
-    def self.search_foursquare(location, category_id)
+    def self.search_foursquare(location, criteria)
+        secret_hash = JSON.parse(File.read('secrets.json'))
+        key = secret_hash.keys[0]
+        secret = secret_hash.values[0]
+        url = "https://api.foursquare.com/v2/venues/search?client_id=#{key}&client_secret=#{secret}&v=20130815&near=#{location}&query=#{criteria}"
+        result = open(url).read
+        return result
     end
 
     # This method takes a string (the result of a foursquare api call)
     # and returns an array of Restaurant objects contained in the foursquare
     # api call
-    def self.import_from_foursquare(foursquare_text)
+    def self.import_from_foursquare(foursquare_string)
+        hash = JSON.parse(foursquare_string)
+        restaurant_hash_array = hash["response"]["venues"]
+        result = restaurant_hash_array.map do |restaurant_hash|
+            new_hash = {
+                name: restaurant_hash["name"],
+                street_address: restaurant_hash["location"]["address"],
+                city: restaurant_hash["location"]["city"],
+                state: restaurant_hash["location"]["state"],
+                zip: restaurant_hash["location"]["postalCode"],
+                category: restaurant_hash["categories"][0]["name"]
+            }
+            Restaurant.new(new_hash)
+        end
+        return result
+        #return array of restaurant objects
     end
 
     # This performs the complete search and import operation on foursquare.

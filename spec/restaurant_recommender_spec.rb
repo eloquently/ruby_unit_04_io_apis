@@ -77,12 +77,14 @@ describe RestaurantRecommender do
         end
 
         it 'gives each restaurant a name' do
+            puts imported_restaurants.inspect
             expect(imported_restaurants.map(&:name).reject(&:nil?).count).to eq(19)
         end
 
         it 'gives each restaurant a category' do
             expect(imported_restaurants.map(&:category).reject(&:nil?).count).to eq(19)
         end
+
     end
 
 end
