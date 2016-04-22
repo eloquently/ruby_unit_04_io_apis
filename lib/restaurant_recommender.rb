@@ -47,7 +47,7 @@ class RestaurantRecommender
     # Use the File.read method in order to make the test pass
     def import_restaurants(file_name)
         hash = JSON.parse(File.read(file_name))
-        self.restaurants.concat(hash["restaurants"]) if hash["restaurants"]
+        self.restaurants.concat(Restaurant.new(hash["restaurants"])) if hash["restaurants"]
     end
 
     # Return a string with 2 restaurant names
