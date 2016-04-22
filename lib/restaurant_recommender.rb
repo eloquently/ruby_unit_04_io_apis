@@ -30,16 +30,6 @@ class RestaurantRecommender
         end
     end
 
-<<<<<<< HEAD
-    # Import all the restaurants
-    # Use the File.read method in order to make the test pass
-    def import_restaurants(file_name)
-        hash = JSON.parse(File.read(file_name))
-        self.restaurants.concat(hash["restaurants"]) if hash["restaurants"]
-    end
-
-=======
->>>>>>> master
     # Export all the restaurants to file_name
     # Use File.write(your_file_name_here, your_str_here) to get the test to pass
     def export_restaurants(file_name)
@@ -52,6 +42,8 @@ class RestaurantRecommender
     # created by export_restaurants.
     # Use the File.read method in order to make the test pass
     def import_restaurants(file_name)
+        hash = JSON.parse(File.read(file_name))
+        self.restaurants.concat(hash["restaurants"]) if hash["restaurants"]
     end
 
     # Return a string with 2 restaurant names
