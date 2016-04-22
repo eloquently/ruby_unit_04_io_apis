@@ -52,11 +52,15 @@ describe RestaurantRecommender do
     end
 
     describe '#recommendations' do
-        it 'returns a string with Restaurant 1 and Restaurant 2'
+        it 'returns a string with Restaurant 1 and Restaurant 2' do
+            expect(rr.recommendations).to eq("Restaurant 1, Restaurant 2")
+        end
     end
 
     describe '#count_restaurants' do
-        it 'returns the number of restaurants'
+        it 'returns the number of restaurants' do
+            expect(rr.count_restaurants).to eq(2)
+        end
     end
 
     describe 'RestaurantRecommender#import_from_foursquare' do

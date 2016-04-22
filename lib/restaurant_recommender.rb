@@ -37,21 +37,25 @@ class RestaurantRecommender
     # Import all the restaurants
     # Use the File.read method in order to make the test pass
     def import_restaurants(file_name)
-        count = 0
-        imported_restaurants = File.read(file_name)
-        return imported_restaurants
+        imported_array = JSON.parse(File.read(file_name))["restaurants"]
+        imported_array.each do |i|
+            self.restaurants << Restaurant.new(i)
+        end
     end
 
     # Export all the restaurants to file_name
     def export_restaurants(file_name)
+        File.write(file_name, { restaurants: self.restaurants.map(&:to_hash) }.to_json)
     end
 
     # Return a string with 2 restaurant names
     def recommendations
+        return "#{self.restaurants[0].name}, #{self.restaurants[1].name}"
     end
 
     # Return the number of restaurants available
     def count_restaurants
+        return restaurants.count
     end
 
     # Search foursquare for venues in the given category
