@@ -24,5 +24,13 @@ class Restaurant
     # This method returns a hash with keys equal to the instance variable
     # names and values equal to the values from those instance variables
     def to_hash
+        return {
+            name: self.name,
+            street_address: @street_address,
+            city: @city,
+            state: @state,
+            zip: @zip,
+            category: self.category
+        }
     end
 end

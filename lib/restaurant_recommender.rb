@@ -27,6 +27,8 @@ class RestaurantRecommender
             return export_restaurants(command_words[1])
         elsif command_words[0] == "count"
             return count_restaurants
+        elsif command_words[0] == "recommend"
+            return recommendations
         elsif command_words[0] == "whatsnear"
             return foursquare_lookup(command_words[1])
         end
@@ -50,6 +52,7 @@ class RestaurantRecommender
 
     # Return a string with 2 restaurant names
     def recommendations
+        self.restaurants.first(2).map(&:name).join("\n")
     end
 
     # Return the number of restaurants available
@@ -94,6 +97,6 @@ class RestaurantRecommender
         foursquare_results = RestaurantRecommender.search_foursquare(location, category_id)
         new_restaurants = RestaurantRecommender.import_from_foursquare(foursquare_results)
         self.restaurants += new_restaurants
-        return "#{new_restaurants.count} new restaurants added"
+        return "#{new_restaurants.count} new restaurants added (#{self.restaurants.count} total)"
     end
 end
