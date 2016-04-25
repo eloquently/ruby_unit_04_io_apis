@@ -1,0 +1,12 @@
+{
+    "first_name": "Jack",
+    "last_name": "Sprat",
+    "test_scores": [10, 9, 12],
+    "parents": [
+        {
+            "first_name": "Mother",
+            "last_name": "Hubbard",
+            "phone": "555 555 5555"
+        }
+    ]
+}

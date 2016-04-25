@@ -1,0 +1,2 @@
+Hello world.
+This string is coming from a file!
