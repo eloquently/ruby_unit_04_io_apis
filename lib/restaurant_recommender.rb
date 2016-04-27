@@ -28,7 +28,11 @@ class RestaurantRecommender
 
     # Export all the restaurants to file_name
     def export_restaurants(file_name)
-        File.write(file_name,w)
+        #File.write(file_name,'w') ||
+        #file = open('file_name', 'w')
+        #file.write('restaurant info')
+        #file.close
+        
     end
 
     # Import all the restaurants from file_name and add them to @restaurants
