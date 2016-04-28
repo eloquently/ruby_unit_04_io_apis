@@ -28,11 +28,8 @@ class RestaurantRecommender
 
     # Export all the restaurants to file_name
     def export_restaurants(file_name)
-        #File.write(file_name,'w') ||
-        #file = open('file_name', 'w')
-        #file.write('restaurant info')
-        #file.close
-        
+        restaurant_hashes = self.restaurants.map {|element| element.to_hash}
+        File.write(file_name, {restaurants: restaurant_hashes}.to_json)
     end
 
     # Import all the restaurants from file_name and add them to @restaurants

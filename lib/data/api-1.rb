@@ -17,7 +17,7 @@ result_hash = JSON.parse(result_str)
 
 restaurants = result_hash["response"]["venues"]
 
-restaurant_names = restaurants.map { |r| r}
+restaurant_names = restaurants.map { |r| r["name"]}
 
 File.write('restaurant_names.json', restaurant_names.to_json)
 

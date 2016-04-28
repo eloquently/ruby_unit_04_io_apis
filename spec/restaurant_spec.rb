@@ -6,7 +6,7 @@ describe Restaurant do
         Restaurant.new( name: "Mucha Lucha Taco Shop",
                         city: "Tempe",
                         state: "AZ",
-                        zip: "85282",
+                        #zip: "85282",
                         category: "Taco Place")
     end
 
@@ -33,6 +33,15 @@ describe Restaurant do
     end
 
     describe "#to_hash" do
-        it 'returns a hash will all instance variables'
+        it 'returns a hash with all instance variables' do
+            expect(restaurant.to_hash).to eq({
+                name: "Pop Sickels Stand",
+                street_address: "1706 S College Ave",
+                city: "Tempe",
+                state: "AZ",
+                zip: "85281",
+                category: "Ice Cream Shop"
+            })
+        end
     end
 end

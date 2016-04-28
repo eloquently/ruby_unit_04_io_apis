@@ -19,10 +19,27 @@ class Restaurant
     # by using the @ syntax (e.g. @street_address rather than
     # self.street_address)
     def full_address
+        if @street_address == nil ||
+            @city == nil ||
+            @state == nil ||
+            @zip == nil
+            return nil
+        else
+            return "#{@street_address}, #{@city}, #{@state} #{@zip}"
+        end
+       # 1706 S College Ave, Tempe, AZ 85281
     end
 
     # This method returns a hash with keys equal to the instance variable
     # names and values equal to the values from those instance variables
     def to_hash
+        {
+            name: self.name,
+            street_address: self.street_address,
+            city: self.city,
+            state: self.state,
+            zip: self.zip,
+            category: self.category
+        }
     end
 end
