@@ -1,5 +1,6 @@
 require 'json'
 require_relative 'restaurant'
+require_relative 'data/api'
 
 class RestaurantRecommender
     attr_accessor :restaurants
