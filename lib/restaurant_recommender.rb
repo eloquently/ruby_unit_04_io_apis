@@ -23,6 +23,14 @@ class RestaurantRecommender
 
         if command_words[0] == "import"
             return import_restaurants(command_words[1])
+            elsif command_words[0] == "export"
+            return export_restaurants(command_words[1])
+            elsif command_words[0] == "recommend"
+            return recommendations
+            elsif command_words[0] == "count"
+            return count_restaurants
+            elsif command_words[0] == "lookup"
+            return foursquare_lookup(command_words[1])
         end
     end
 
@@ -37,10 +45,15 @@ class RestaurantRecommender
     # created by export_restaurants.
     # Use the File.read method in order to make the test pass
     def import_restaurants(file_name)
+        result_str = File.read(file_name)
+        result_hash = JSON.parse(result_str)
+        restaurant_hashes = result_hash["restaurants"]
+        restaurant_hashes.each {|restaurant_hash| self.restaurants << Restaurant.new(restaurant_hash) }
     end
 
     # Return a string with 2 restaurant names
     def recommendations
+        
     end
 
     # Return the number of restaurants available

@@ -6,7 +6,7 @@ describe Restaurant do
         Restaurant.new( name: "Mucha Lucha Taco Shop",
                         city: "Tempe",
                         state: "AZ",
-                        #zip: "85282",
+                        zip: "85282",
                         category: "Taco Place")
     end
 
