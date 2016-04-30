@@ -59,10 +59,7 @@ class RestaurantRecommender
 
     # Return the number of restaurants available
     def count_restaurants
-        result_str = File.read(file_name)
-        result_hash = JSON.parse(result_str)
-        restaurant_hashes = result_hash["restaurants"]
-        restaurant_hashes.count
+        self.restaurants.count
     end
 
     # Search foursquare for venues in the given category
