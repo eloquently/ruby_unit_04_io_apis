@@ -37,8 +37,8 @@ class RestaurantRecommender
     # Export all the restaurants to file_name
     # Use File.write(your_file_name_here, your_str_here) to get the test to pass
     def export_restaurants(file_name)
-        puts "#{{ restaurants: self.restaurants.map(&:to_hash) }.to_json}"
         File.write(file_name, { restaurants: self.restaurants.map(&:to_hash) }.to_json )
+        return "Exported #{self.restaurants.count} restaurants."
     end
 
     # Import all the restaurants from file_name and add them to @restaurants
@@ -47,7 +47,7 @@ class RestaurantRecommender
     # Use the File.read method in order to make the test pass
     def import_restaurants(file_name)
         hash = JSON.parse(File.read(file_name))
-        self.restaurants.concat(hash["restaurants"]) if hash["restaurants"]
+        self.restaurants.concat(hash["restaurants"].map { |r_hash| Restaurant.new(r_hash) }) if hash["restaurants"]
     end
 
     # Return a string with 2 restaurant names
