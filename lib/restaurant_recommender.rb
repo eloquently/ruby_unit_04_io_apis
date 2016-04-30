@@ -54,7 +54,7 @@ class RestaurantRecommender
 
     # Return a string with 2 restaurant names
     def recommendations
-        print "#{restaurant_hashes[7]["name"]}, #{restaurant_hashes[8]["name"]}"
+        print "#{self.restaurants[7]["name"]}, #{self.restaurants[8]["name"]}"
     end
 
     # Return the number of restaurants available
