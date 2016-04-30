@@ -1,6 +1,7 @@
 require 'open-uri'
 require 'json'
 
+
 secrets = JSON.parse(File.read('unit_04_lecture/secrets.json'))
 url = "https://api.foursquare.com/v2/venues/search?near=85251&v=20160426&client_id=#{secrets["foursquare_client_id"]}&client_secret=#{secrets["foursquare_client_secret"]}&categoryid=4d4b7105d754a06374d81259"
 
