@@ -76,14 +76,13 @@ class RestaurantRecommender
     # api call
     def self.import_from_foursquare(foursquare_text)
         new_hash = JSON.parse(foursquare_text)
-        #in_new_hash = new_hash["response"]
-        #name_in_new_hash = new_hash["response"]["venues"]
         name_in_new_hash = new_hash["response"]["venues"]
         File.write('name_in_new_hash.json', name_in_new_hash.to_json)
-        map_name_in_new_hash = name_in_new_hash.map { |r| r}
-        File.write('map_name_in_new_hash.json', map_name_in_new_hash.to_json)
-        puts name_in_new_hash
-        #name_in_new_hash.map {|name| name == "name" puts name }
+        #in_array = name_in_new_hash.find {|x| x['label'] == 'cat' }
+        #flatten_ninh = name_in_new_hash.flatten
+        final_hash = Hash[*name_in_new_hash.collect{|h| h.to_a}.flatten]
+        File.write('final_hash.json', final_hash.to_json)
+        puts final_hash
     end
 
     # This performs the complete search and import operation on foursquare.
