@@ -75,14 +75,24 @@ class RestaurantRecommender
     # and returns an array of Restaurant objects contained in the foursquare
     # api call
     def self.import_from_foursquare(foursquare_text)
-        new_hash = JSON.parse(foursquare_text)
-        name_in_new_hash = new_hash["response"]["venues"]
-        File.write('name_in_new_hash.json', name_in_new_hash.to_json)
+        results = JSON.parse(foursquare_text)
+        fsq_restaurants = results["response"]["venues"]
+        File.write('fsq_restaurants.json', fsq_restaurants.to_json)
+        restaurants = fsq_restaurants.map do |h| Restaurant.new()
+            # Use Restaurant.new to create a restaurant object
+            # using the data from h
+        end
+        return restaurants
+        #puts restaurants
         #in_array = name_in_new_hash.find {|x| x['label'] == 'cat' }
         #flatten_ninh = name_in_new_hash.flatten
-        final_hash = Hash[*name_in_new_hash.collect{|h| h.to_a}.flatten]
-        File.write('final_hash.json', final_hash.to_json)
-        puts final_hash
+        # final_hash = Hash[*name_in_new_hash.collect{|h| h.to_a}.flatten]
+        # File.write('final_hash.json', final_hash.to_json)
+        # puts final_hash.values
+        #def self.import_from_foursquare(foursquare_text)
+        #results = JSON.parse(foursquare_text)
+        #fsq_restaurants = results["response"]["venues"]
+        
     end
 
     # This performs the complete search and import operation on foursquare.
