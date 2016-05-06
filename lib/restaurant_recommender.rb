@@ -54,17 +54,9 @@ class RestaurantRecommender
 
     # Return a string with 2 restaurant names
     def recommendations
-        results = self.restaurants.count
-        results_to_hash = results.map(&:to_hash).join('\n')
-        #File.write('results_to_hash.json', results_to_hash.to_json)
-        rr = results_to_hash.map { |r| puts r.keys }
-        puts results
-        puts rr
-
-        #restaurants.map(&:to_hash).join('\n')
-        #File.write('restaurants.json', restaurants.map(&:to_hash).join('\n'))
-        
-       # print "#{self.restaurants["name"]}, #{self.restaurants["name"]}"
+        results = self.restaurants
+        results_names = results.map(&:name)
+        return results_names.join(', ')
     end
 
     # Return the number of restaurants available
