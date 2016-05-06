@@ -78,11 +78,14 @@ class RestaurantRecommender
         results = JSON.parse(foursquare_text)
         fsq_restaurants = results["response"]["venues"]
         File.write('fsq_restaurants.json', fsq_restaurants.to_json)
-        restaurants = fsq_restaurants.map do |h| Restaurant.new()
+        restaurants = fsq_restaurants.map do |h|
+            #Restaurant.new = restaurants << h
             # Use Restaurant.new to create a restaurant object
             # using the data from h
+            puts restaurants
         end
         return restaurants
+        
         #puts restaurants
         #in_array = name_in_new_hash.find {|x| x['label'] == 'cat' }
         #flatten_ninh = name_in_new_hash.flatten
